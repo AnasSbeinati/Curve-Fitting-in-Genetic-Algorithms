@@ -1,0 +1,59 @@
+// test
+		Chromosome chromosome = new Chromosome();
+		ArrayList<Float> genes = new ArrayList<>();
+		ArrayList<FloatPoint> points = new ArrayList<>();
+		genes.add(1f);
+		genes.add(2f);
+		genes.add(3f);
+		genes.add(4f);
+		for (int i = 0; i < 3; i++) {
+			FloatPoint point = new FloatPoint();
+			point.x = i + 2;
+			points.add(point);
+		}
+		points.get(0).y = 8;
+		points.get(1).y = 27;
+		points.get(2).y = 64;
+		chromosome.genes = genes;
+		Input input = new Input();
+		input.points = points;
+		System.out.println(chromosome.fitness(input));
+		// test generate population
+		input.equationDegree = 3;
+		input.iterationsNum = 1;
+		input.numOfPoints = 3;
+		input.populationSize = 200;
+		ArrayList<Chromosome> pop = generatePop(input);
+		// test fitness
+		fitness(input, pop);
+		// testselect
+		ArrayList<Chromosome> towCh = select(input, pop);
+		// test CrossOver
+		crossover(input, towCh);
+		//test Mutation
+		mutate(input, towCh, 4);
+		\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+		ArrayList<FloatPoint> points = new ArrayList<>();
+		for (int i = 0; i < 4; i++) {
+			FloatPoint point = new FloatPoint();
+			point.x = i + 1;
+			points.add(point);
+		}
+		points.get(0).y = 5;
+		points.get(1).y = 8;
+		points.get(2).y = 13;
+		points.get(3).y = 20;
+
+		Input input = new Input();
+		input.points = points;
+		// test generate population
+		input.equationDegree = 2;
+		input.iterationsNum = 5000;
+		input.numOfPoints = 4;
+		input.populationSize = 200;
+		Output output = getSol(input);
+		for (Float floatC : output.coffecient) {
+			System.out.print(floatC + " ");
+		}
+		System.out.println();
+		System.out.println(output.error);
